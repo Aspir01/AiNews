@@ -7,13 +7,29 @@ const AddNews = () => {
     const [title, setTitle] = useState("")
     const [description, setDescription] = useState("")
 
+    const handleClassAndDuplicates = () => {
+        // Запрос на сервер для загрузки данных в базу данных
+        fetch('ссылка_на_API', {
+            method: 'POST',
+            body: JSON.stringify({ title, description })
+        })
+            .then(response => response.json())
+            .then(data => {
+                const { removed, classes } = data;
+                console.log('Removed duplicates:', removed);
+                console.log('Classes:', classes);
+                // Здесь можно обработать полученные данные
+            });
+    };
+
+
     return (
         <div className={style.news}>
             <p>Создайте <b>новость!</b></p>
             <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} placeholder='Введите заголовок' />
             <textarea onChange={(e) => setDescription(e.target.value)} value={description} placeholder='Введите описание'></textarea>
             <div className={style.btns}>
-                <button >Сохранить</button>
+                <button onClick={handleClassAndDuplicates}>Определить класс и дубликаты</button>
                 <Link to="/AiNews/">
                     <button>Отменить</button>
                 </Link>

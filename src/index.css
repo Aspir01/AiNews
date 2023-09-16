@@ -32,3 +32,11 @@ b {
 button {
   cursor: pointer;
 }
+
+
+@media (width < 900px) {
+  .App {
+    height: 103vh;
+    width: 101vw;
+  }
+}
